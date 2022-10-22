@@ -24,4 +24,4 @@ jobs:
 
       - name: Get the module using proxy
         env: {GOPROXY: '${{ matrix.proxy }}'}
-        run: go get -v -x -u "github.com/tarampampam/go-uikit@${{ steps.slug.outputs.tag-name }}"
+        run: go get -v -x -u "github.com/tarampampam/colors@${{ steps.slug.outputs.tag-name }}"
