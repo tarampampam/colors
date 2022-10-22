@@ -16,7 +16,7 @@ func main() {
 		(colors.FgMagenta | colors.FgBright).Wrap("included"),
 	)
 
-	println()
+	println() // empty line
 
 	for _, set := range []struct {
 		name                          string
