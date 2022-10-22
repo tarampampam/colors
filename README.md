@@ -16,8 +16,8 @@ One more Go library for using colors in the terminal console. The most important
 - ANSI colors support (using Escape Sequences)
 - Multi-thread safe
 - Support `FORCE_COLOR`, `NO_COLOR` and `TERM` variables out of the box
-- Super-lightweight and extremely fast _(only 1 allocation per color, and only in the first usage time)_
-- Color codes are not pre-allocated, but cached (in memory) and re-used where possible
+- Super-lightweight and extremely fast
+- Color codes are not pre-allocated, but cached (in memory) and re-used upon further usage
 - Easy to integrate with the existing code-base
 
 ## Usage examples
