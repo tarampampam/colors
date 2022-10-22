@@ -16,8 +16,7 @@ jobs:
           - https://goproxy.cn
           - https://goproxy.dev
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3
 
       - uses: gacts/github-slug@v1
         id: slug

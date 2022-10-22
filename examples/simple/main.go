@@ -8,7 +8,7 @@ import (
 
 func main() {
 	fmt.Println(
-		(colors.FgGreen | colors.Bold).Wrap("UIKit:"),
+		(colors.FgGreen | colors.Bold).Wrap("tarampampam/colors:"),
 		(colors.FgBlue | colors.FgBright).Wrap("an"),
 		(colors.FgWhite | colors.FgBright).Wrap("ANSI"),
 		(colors.FgYellow | colors.FgBright).Wrap("colors"),

@@ -1,15 +1,22 @@
-# colors
+# 🦜 colors
 
+![go_version][badge_go_version]
 [![tests][badge_tests]][actions]
-[![release][badge_release]][actions]
-[![Coverage][badge_coverage]][coverage]
+[![coverage][badge_coverage]][coverage]
+[![docs][badge_docs]][docs]
+
+<div align="center">
+
+![screenshot](https://user-images.githubusercontent.com/7326800/197354081-4a083eb2-5f94-4475-9ac0-e23a6de9a378.png)
+
+</div>
 
 One more Go library for using colors in the terminal console. The most important features are:
 
 - ANSI colors support (using Escape Sequences)
 - Multi-thread safe
 - Support `FORCE_COLOR`, `NO_COLOR` and `TERM` variables out of the box
-- Super-lightweight
+- Super-lightweight and extremely fast _(only 1 allocation per color, and only in the first usage time)_
 - Color codes are not pre-allocated, but cached (in memory) and re-used where possible
 - Easy to integrate with the existing code-base
 
@@ -38,8 +45,10 @@ func main() {
 
 For more examples see [examples](./examples) directory.
 
-[badge_tests]:https://github.com/tarampampam/colors/actions/workflows/tests.yml/badge.svg
-[badge_release]:https://github.com/tarampampam/colors/actions/workflows/release.yml/badge.svg
+[badge_tests]:https://img.shields.io/github/workflow/status/tarampampam/colors/tests/master
 [badge_coverage]:https://img.shields.io/codecov/c/github/tarampampam/colors/master.svg?maxAge=30
+[badge_docs]:https://pkg.go.dev/badge/mod/github.com/tarampampam/colors
+[badge_go_version]:https://img.shields.io/badge/go%20version-%3E=1.16-61CFDD.svg
 [actions]:https://github.com/tarampampam/colors/actions
 [coverage]:https://codecov.io/gh/tarampampam/colors
+[docs]:https://pkg.go.dev/github.com/tarampampam/colors
