@@ -2,6 +2,7 @@
 
 [![tests][badge_tests]][actions]
 [![release][badge_release]][actions]
+[![Coverage][badge_coverage]][coverage]
 
 One more Go library for using colors in the terminal console. The most important features are:
 
@@ -39,4 +40,6 @@ For more examples see [examples](./examples) directory.
 
 [badge_tests]:https://github.com/tarampampam/colors/actions/workflows/tests.yml/badge.svg
 [badge_release]:https://github.com/tarampampam/colors/actions/workflows/release.yml/badge.svg
+[badge_coverage]:https://img.shields.io/codecov/c/github/tarampampam/colors/master.svg?maxAge=30
 [actions]:https://github.com/tarampampam/colors/actions
+[coverage]:https://codecov.io/gh/tarampampam/colors
