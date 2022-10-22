@@ -5,7 +5,7 @@
 
 One more Go library for using colors in the terminal console. The most important features are:
 
-- ANSI colors support
+- ANSI colors support (using Escape Sequences)
 - Multi-thread safe
 - Support `FORCE_COLOR`, `NO_COLOR` and `TERM` variables out of the box
 - Super-lightweight
