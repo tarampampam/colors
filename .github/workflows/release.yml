@@ -1,0 +1,27 @@
+name: release
+
+on:
+  release: # Docs: <https://help.github.com/en/articles/events-that-trigger-workflows#release-event-release>
+    types: [published]
+
+jobs:
+  godocs:
+    name: Renew docs and cache (${{ matrix.proxy }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        proxy:
+          - https://proxy.golang.org
+          - https://goproxy.cn
+          - https://goproxy.dev
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+
+      - uses: gacts/github-slug@v1
+        id: slug
+
+      - name: Get the module using proxy
+        env: {GOPROXY: '${{ matrix.proxy }}'}
+        run: go get -v -x -u "github.com/tarampampam/go-uikit@${{ steps.slug.outputs.tag-name }}"

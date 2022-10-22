@@ -1,0 +1,66 @@
+name: tests
+
+on:
+  push:
+    branches: [master, main]
+    paths-ignore: ['**.md']
+    tags-ignore: ['**']
+  pull_request:
+    paths-ignore: ['**.md']
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  git-leaks:
+    name: GitLeaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with: {fetch-depth: 0}
+
+      - uses: gacts/gitleaks@v1 # Action page: <https://github.com/gacts/gitleaks>
+
+  lint:
+    name: Golang-CI (lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+
+      - uses: golangci/golangci-lint-action@v3 # Action page: <https://github.com/golangci/golangci-lint-action>
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        go: ['1.18', '1.19']
+    steps:
+      - uses: actions/setup-go@v3
+        with: {go-version: '${{ matrix.go }}'}
+
+      - uses: actions/checkout@v3
+        with: {fetch-depth: 2} # Fixes codecov error 'Issue detecting commit SHA'
+
+      - name: Go modules Cache # Docs: <https://git.io/JfAKn#go---modules>
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: go-${{ hashFiles('**/go.sum') }}
+          restore-keys: go-
+
+      - run: go mod download
+
+      - run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./...
+
+      - name: Upload Coverage report to CodeCov
+        continue-on-error: true
+        uses: codecov/codecov-action@v3 # https://github.com/codecov/codecov-action
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.txt
+          fail_ci_if_error: false
