@@ -45,7 +45,7 @@ func main() {
 
 For more examples see [examples](./examples) directory.
 
-[badge_tests]:https://img.shields.io/github/workflow/status/tarampampam/colors/tests/master
+[badge_tests]:https://img.shields.io/github/actions/workflow/status/tarampampam/colors/tests.yml?branch=master
 [badge_coverage]:https://img.shields.io/codecov/c/github/tarampampam/colors/master.svg?maxAge=30
 [badge_docs]:https://pkg.go.dev/badge/mod/github.com/tarampampam/colors
 [badge_go_version]:https://img.shields.io/badge/go%20version-%3E=1.16-61CFDD.svg
