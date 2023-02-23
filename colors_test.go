@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tarampampam/colors"
+	"gh.tarampamp.am/colors"
 )
 
 func ExampleTextStyle_Wrap() {

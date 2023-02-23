@@ -18,9 +18,8 @@ jobs:
     steps:
       - uses: actions/setup-go@v3
 
-      - uses: gacts/github-slug@v1
-        id: slug
+      - {uses: gacts/github-slug@v1, id: slug}
 
       - name: Get the module using proxy
         env: {GOPROXY: '${{ matrix.proxy }}'}
-        run: go get -v -x -u "github.com/tarampampam/colors@${{ steps.slug.outputs.tag-name }}"
+        run: go get -v -x -u "gh.tarampamp.am/colors@${{ steps.slug.outputs.tag-name }}"

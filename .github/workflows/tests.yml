@@ -31,6 +31,7 @@ jobs:
       - uses: actions/setup-go@v3
 
       - uses: golangci/golangci-lint-action@v3 # Action page: <https://github.com/golangci/golangci-lint-action>
+        with: {skip-pkg-cache: true, skip-build-cache: true}
 
   test:
     name: Unit tests
@@ -40,20 +41,11 @@ jobs:
       matrix:
         go: ['1.16', '1.17', '1.18', '1.19', '1.20']
     steps:
-      - uses: actions/setup-go@v3
+      - uses: gacts/setup-go-with-cache@v1
         with: {go-version: '${{ matrix.go }}'}
 
       - uses: actions/checkout@v3
         with: {fetch-depth: 2} # Fixes codecov error 'Issue detecting commit SHA'
-
-      - name: Go modules Cache # Docs: <https://git.io/JfAKn#go---modules>
-        uses: actions/cache@v3
-        with:
-          path: ~/go/pkg/mod
-          key: go-${{ hashFiles('**/go.sum') }}
-          restore-keys: go-
-
-      - run: go mod download
 
       - run: go run ./examples/simple/
 

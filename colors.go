@@ -20,7 +20,7 @@ var colorsEnabled = initColorsState() //nolint:gochecknoglobals // atomic usage 
 func initColorsState() uint32 {
 	if _, exists := os.LookupEnv("FORCE_COLOR"); exists {
 		return colorsOn
-	} else if _, exists = os.LookupEnv("NO_COLOR"); exists { //nolint:gocritic // docs: <https://no-color.org/>
+	} else if _, exists = os.LookupEnv("NO_COLOR"); exists { // docs: <https://no-color.org/>
 		return colorsOff
 	} else if os.Getenv("TERM") == "dumb" {
 		return colorsOff

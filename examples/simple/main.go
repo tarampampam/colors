@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tarampampam/colors"
+	"gh.tarampamp.am/colors"
 )
 
 func main() {
