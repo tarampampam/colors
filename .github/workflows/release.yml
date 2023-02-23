@@ -20,6 +20,8 @@ jobs:
 
       - {uses: gacts/github-slug@v1, id: slug}
 
+      - run: go mod init test
+
       - name: Get the module using proxy
         env: {GOPROXY: '${{ matrix.proxy }}'}
         run: go get -v -x -u "gh.tarampamp.am/colors@${{ steps.slug.outputs.tag-name }}"
