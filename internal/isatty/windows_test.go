@@ -32,7 +32,9 @@ func TestCygwinPipeName(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if test.result != isatty.IsCygwinPipeName(test.name) {
+		want, got := test.result, isatty.IsCygwinPipeName(test.name)
+
+		if got != want {
 			t.Fatalf("isatty(%q): got %v, want %v:", test.name, got, want)
 		}
 	}
