@@ -6,7 +6,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/mattn/go-isatty"
+	"gh.tarampamp.am/colors/isatty"
 )
 
 const (
