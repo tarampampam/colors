@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"gh.tarampamp.am/colors/isatty"
+	"gh.tarampamp.am/colors/internal/isatty"
 )
 
 func TestTerminal(t *testing.T) {

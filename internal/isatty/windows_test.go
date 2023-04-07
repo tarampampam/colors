@@ -6,7 +6,7 @@ package isatty_test
 import (
 	"testing"
 
-	"gh.tarampamp.am/colors/isatty"
+	"gh.tarampamp.am/colors/internal/isatty"
 )
 
 func TestCygwinPipeName(t *testing.T) {

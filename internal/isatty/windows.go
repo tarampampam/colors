@@ -103,7 +103,7 @@ func IsCygwinTerminal(fd uintptr) bool {
 		if err != nil {
 			return false
 		}
-		return isCygwinPipeName(name)
+		return IsCygwinPipeName(name)
 	}
 
 	// Cygwin/msys's pty is a pipe.
@@ -121,5 +121,5 @@ func IsCygwinTerminal(fd uintptr) bool {
 	}
 
 	l := *(*uint32)(unsafe.Pointer(&buf))
-	return isCygwinPipeName(string(utf16.Decode(buf[2 : 2+l/2])))
+	return IsCygwinPipeName(string(utf16.Decode(buf[2 : 2+l/2])))
 }
