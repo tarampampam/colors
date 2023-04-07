@@ -48,7 +48,7 @@ For more examples see [examples](./examples) directory.
 [badge_tests]:https://img.shields.io/github/actions/workflow/status/tarampampam/colors/tests.yml?branch=master
 [badge_coverage]:https://img.shields.io/codecov/c/github/tarampampam/colors/master.svg?maxAge=30
 [badge_docs]:https://pkg.go.dev/badge/mod/gh.tarampamp.am/colors
-[badge_go_version]:https://img.shields.io/badge/go%20version-%3E=1.16-61CFDD.svg
+[badge_go_version]:https://img.shields.io/badge/go%20version-%3E=1.17-61CFDD.svg
 [actions]:https://github.com/tarampampam/colors/actions
 [coverage]:https://codecov.io/gh/tarampampam/colors
 [docs]:https://pkg.go.dev/gh.tarampamp.am/colors
