@@ -2,10 +2,9 @@ package colors_test
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 
 	"gh.tarampamp.am/colors"
 )
@@ -48,56 +47,56 @@ func TestColorsEnabled(t *testing.T) {
 
 	colors.Enabled(false)
 
-	assert.False(t, colors.Enabled())
+	assertFalse(t, colors.Enabled())
 	colors.Enabled(false)
-	assert.False(t, colors.Enabled())
+	assertFalse(t, colors.Enabled())
 
 	colors.Enabled(true)
-	assert.True(t, colors.Enabled())
+	assertTrue(t, colors.Enabled())
 }
 
 func TestTextStyle_Has(t *testing.T) {
 	var s = colors.BgBlack | colors.FgWhite | colors.Bold
 
-	assert.False(t, s.Has(colors.BgWhite))
-	assert.False(t, s.Has(colors.FgBlack))
-	assert.False(t, s.Has(colors.Italic))
-	assert.False(t, s.Has(colors.Reset))
-	assert.False(t, s.Has(colors.BgDefault))
+	assertFalse(t, s.Has(colors.BgWhite))
+	assertFalse(t, s.Has(colors.FgBlack))
+	assertFalse(t, s.Has(colors.Italic))
+	assertFalse(t, s.Has(colors.Reset))
+	assertFalse(t, s.Has(colors.BgDefault))
 
-	assert.True(t, s.Has(colors.BgBlack))
-	assert.True(t, s.Has(colors.FgWhite))
-	assert.True(t, s.Has(colors.Bold))
+	assertTrue(t, s.Has(colors.BgBlack))
+	assertTrue(t, s.Has(colors.FgWhite))
+	assertTrue(t, s.Has(colors.Bold))
 }
 
 func TestTextStyle_Add(t *testing.T) {
 	var s = colors.BgBlack
 
-	assert.False(t, s.Has(colors.BgWhite))
-	assert.False(t, s.Has(colors.Bold))
-	assert.True(t, s.Has(colors.BgBlack))
-	assert.False(t, s.Has(colors.Underline))
+	assertFalse(t, s.Has(colors.BgWhite))
+	assertFalse(t, s.Has(colors.Bold))
+	assertTrue(t, s.Has(colors.BgBlack))
+	assertFalse(t, s.Has(colors.Underline))
 
 	s.Add(colors.BgWhite, colors.Bold)
 
-	assert.True(t, s.Has(colors.BgWhite))
-	assert.True(t, s.Has(colors.Bold))
-	assert.False(t, s.Has(colors.Underline))
+	assertTrue(t, s.Has(colors.BgWhite))
+	assertTrue(t, s.Has(colors.Bold))
+	assertFalse(t, s.Has(colors.Underline))
 }
 
 func TestTextStyle_Remove(t *testing.T) {
 	var s = colors.BgBlack | colors.BgWhite | colors.Bold
 
-	assert.True(t, s.Has(colors.BgWhite))
-	assert.True(t, s.Has(colors.Bold))
-	assert.True(t, s.Has(colors.BgBlack))
-	assert.False(t, s.Has(colors.Underline))
+	assertTrue(t, s.Has(colors.BgWhite))
+	assertTrue(t, s.Has(colors.Bold))
+	assertTrue(t, s.Has(colors.BgBlack))
+	assertFalse(t, s.Has(colors.Underline))
 
 	s.Remove(colors.BgWhite, colors.Bold, colors.Underline)
 
-	assert.False(t, s.Has(colors.BgWhite))
-	assert.False(t, s.Has(colors.Bold))
-	assert.False(t, s.Has(colors.Underline))
+	assertFalse(t, s.Has(colors.BgWhite))
+	assertFalse(t, s.Has(colors.Bold))
+	assertFalse(t, s.Has(colors.Underline))
 }
 
 func TestTextStyle_ColorCodes(t *testing.T) {
@@ -174,23 +173,23 @@ func TestTextStyle_ColorCodes(t *testing.T) {
 
 			var start, reset = tt.giveTextStyle.ColorCodes()
 
-			assert.EqualValues(t, tt.wantStart, start)
-			assert.EqualValues(t, tt.wantReset, reset)
+			assertEqualValues(t, tt.wantStart, start)
+			assertEqualValues(t, tt.wantReset, reset)
 
-			assert.EqualValues(t, tt.wantStart, tt.giveTextStyle.Start())
-			assert.EqualValues(t, tt.wantStart, tt.giveTextStyle.String())
-			assert.EqualValues(t, tt.wantReset, tt.giveTextStyle.Reset())
+			assertEqualValues(t, tt.wantStart, tt.giveTextStyle.Start())
+			assertEqualValues(t, tt.wantStart, tt.giveTextStyle.String())
+			assertEqualValues(t, tt.wantReset, tt.giveTextStyle.Reset())
 
 			colors.Enabled(false) // disable colors
 
 			start, reset = tt.giveTextStyle.ColorCodes()
 
-			assert.EqualValues(t, tt.wantStart, start) // not changed
-			assert.EqualValues(t, tt.wantReset, reset) // not changed
+			assertEqualValues(t, tt.wantStart, start) // not changed
+			assertEqualValues(t, tt.wantReset, reset) // not changed
 
-			assert.EqualValues(t, "", tt.giveTextStyle.Start())  // empty
-			assert.EqualValues(t, "", tt.giveTextStyle.String()) // empty
-			assert.EqualValues(t, "", tt.giveTextStyle.Reset())  // empty
+			assertEqualValues(t, "", tt.giveTextStyle.Start())  // empty
+			assertEqualValues(t, "", tt.giveTextStyle.String()) // empty
+			assertEqualValues(t, "", tt.giveTextStyle.Reset())  // empty
 		})
 	}
 }
@@ -205,11 +204,11 @@ func TestTextStyle_Wrap(t *testing.T) {
 
 	colors.Enabled(true) // enable colors
 
-	assert.EqualValues(t, "\x1b[1;4;90mFOOBAR\x1b[39;24;22m", testStyle.Wrap("FOOBAR"))
+	assertEqualValues(t, "\x1b[1;4;90mFOOBAR\x1b[39;24;22m", testStyle.Wrap("FOOBAR"))
 
 	colors.Enabled(false) // disable colors
 
-	assert.EqualValues(t, "FOOBAR", testStyle.Wrap("FOOBAR"))
+	assertEqualValues(t, "FOOBAR", testStyle.Wrap("FOOBAR"))
 }
 
 var bmWrapRes string
@@ -225,5 +224,29 @@ func BenchmarkColorCodes(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		bmWrapRes = (colors.FgGreen | colors.BgRed | colors.Bold).Wrap("FOOBAR")
+	}
+}
+
+func assertTrue(t *testing.T, shouldBeTrue bool) {
+	t.Helper()
+
+	if !shouldBeTrue {
+		t.Error("should be true")
+	}
+}
+
+func assertFalse(t *testing.T, shouldBeFalse bool) {
+	t.Helper()
+
+	if shouldBeFalse {
+		t.Error("should be false")
+	}
+}
+
+func assertEqualValues(t *testing.T, expected, actual interface{}) {
+	t.Helper()
+
+	if !reflect.DeepEqual(expected, actual) {
+		t.Errorf("expected %v, actual %v", expected, actual)
 	}
 }

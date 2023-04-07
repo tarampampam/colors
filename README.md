@@ -19,6 +19,7 @@ One more Go library for using colors in the terminal console. The most important
 - Super-lightweight and extremely fast
 - Color codes are not pre-allocated, but cached (in memory) and re-used upon further usage
 - Easy to integrate with the existing code-base
+- Has no dependencies (except the standard library and `golang.org/x`)
 
 ## Usage examples
 
