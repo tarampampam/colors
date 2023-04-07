@@ -35,12 +35,12 @@ jobs:
 
   test:
     name: Unit tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         go: ['1.17', '1.18', '1.19', '1.20']
-        os: [darwin, freebsd, openbsd, netbsd, dragonfly, plan9, solaris, linux, aix, windows]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: gacts/setup-go-with-cache@v1
         with: {go-version: '${{ matrix.go }}'}
@@ -51,7 +51,7 @@ jobs:
       - run: go run ./examples/simple/
 
       - if: matrix.os == 'linux'
-        run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./...
+        run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./... # -race is not supported on other OS
         env: {GOOS: '${{ matrix.os }}'}
 
       - if: matrix.os != 'linux'
