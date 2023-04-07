@@ -50,7 +50,12 @@ jobs:
 
       - run: go run ./examples/simple/
 
-      - run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./...
+      - if: matrix.os == 'linux'
+        run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./...
+        env: {GOOS: '${{ matrix.os }}'}
+
+      - if: matrix.os != 'linux'
+        run: go test -covermode=atomic -coverprofile ./coverage.txt ./...
         env: {GOOS: '${{ matrix.os }}'}
 
       - name: Upload Coverage report to CodeCov
