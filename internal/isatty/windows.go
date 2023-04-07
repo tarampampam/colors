@@ -37,6 +37,7 @@ func init() {
 func IsTerminal(fd uintptr) bool {
 	var st uint32
 	r, _, e := syscall.Syscall(procGetConsoleMode.Addr(), 2, fd, uintptr(unsafe.Pointer(&st)), 0)
+
 	return r != 0 && e == 0
 }
 
@@ -92,6 +93,7 @@ func getFileNameByHandle(fd uintptr) (string, error) {
 	if r != 0 {
 		return "", e
 	}
+
 	return string(utf16.Decode(buf[4 : 4+buf[0]/2])), nil
 }
 
@@ -103,6 +105,7 @@ func IsCygwinTerminal(fd uintptr) bool {
 		if err != nil {
 			return false
 		}
+
 		return IsCygwinPipeName(name)
 	}
 
@@ -121,5 +124,6 @@ func IsCygwinTerminal(fd uintptr) bool {
 	}
 
 	l := *(*uint32)(unsafe.Pointer(&buf))
+
 	return IsCygwinPipeName(string(utf16.Decode(buf[2 : 2+l/2])))
 }

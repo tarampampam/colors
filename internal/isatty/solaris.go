@@ -11,6 +11,7 @@ import (
 // see: https://src.illumos.org/source/xref/illumos-gate/usr/src/lib/libc/port/gen/isatty.c
 func IsTerminal(fd uintptr) bool {
 	_, err := unix.IoctlGetTermio(int(fd), unix.TCGETA)
+
 	return err == nil
 }
 
