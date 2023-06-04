@@ -50,7 +50,6 @@ linters: # All available linters list: <https://golangci-lint.run/usage/linters/
     - containedctx # Detects struct contained context.Context field
     - contextcheck # function whether use a non-inherited context
     - decorder # check declaration order and count of types, constants, variables and functions
-    - depguard # Go linter that checks if package imports are in a list of acceptable packages
     - dogsled # Checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
     - dupl # Tool for code clone detection
     - durationcheck # check for two durations multiplied together
