@@ -158,7 +158,7 @@ func (ts TextStyle) rawColorCodes() (start, reset []byte) { //nolint:funlen,gocy
 	if ts.Has(Reset) {
 		start = append(start, resetByte)
 
-		return
+		return //nolint:nakedret
 	}
 
 	const (
@@ -304,7 +304,7 @@ var ccCache = struct { //nolint:gochecknoglobals // color codes in-memory cache
 // depend on the colors enabling state.
 func (ts TextStyle) ColorCodes() (start, reset string) {
 	if ts == 0 {
-		return
+		return //nolint:nakedret
 	}
 
 	ccCache.Lock()
