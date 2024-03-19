@@ -14,7 +14,7 @@ jobs:
         proxy:
           - https://proxy.golang.org
           - https://goproxy.cn
-          - https://goproxy.dev
+          #- https://goproxy.dev
     steps:
       - uses: actions/setup-go@v5
 
