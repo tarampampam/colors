@@ -2,4 +2,4 @@ module gh.tarampamp.am/colors
 
 go 1.17
 
-require golang.org/x/sys v0.18.0
+require golang.org/x/sys v0.19.0
