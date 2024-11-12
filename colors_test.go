@@ -161,7 +161,7 @@ func TestTextStyle_ColorCodes(t *testing.T) {
 		"Strike":    {colors.Strike, "\x1b[9m", "\x1b[29m"},
 
 		"FgBlack(2) | FgBright | Bold | Underline": {
-			colors.FgBlack | colors.FgBlack | colors.FgBright | colors.Bold | colors.Underline, //nolint:gocritic
+			colors.FgBlack | colors.FgBlack | colors.FgBright | colors.Bold | colors.Underline, //nolint:gocritic,staticcheck
 			"\x1b[1;4;90m",
 			"\x1b[39;24;22m",
 		},

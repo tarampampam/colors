@@ -141,7 +141,7 @@ func (TextStyle) byteToString(t byte) string {
 	)
 
 	for i := 0; i < 3; i, j = i+1, j-1 {
-		s[j] = '0' + t%10 //nolint:gomnd
+		s[j] = '0' + t%10 //nolint:mnd
 
 		if t /= 10; t == 0 {
 			break
@@ -304,7 +304,7 @@ var ccCache = struct { //nolint:gochecknoglobals // color codes in-memory cache
 // depend on the colors enabling state.
 func (ts TextStyle) ColorCodes() (start, reset string) {
 	if ts == 0 {
-		return //nolint:nakedret
+		return
 	}
 
 	ccCache.Lock()
