@@ -1,4 +1,7 @@
-name: tests
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+name: 🧪 Tests
 
 on:
   push:
@@ -14,52 +17,35 @@ concurrency:
 
 jobs:
   git-leaks:
-    name: GitLeaks
+    name: 🔐 Check for GitLeaks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with: {fetch-depth: 0}
-
-      - uses: gacts/gitleaks@v1 # Action page: <https://github.com/gacts/gitleaks>
+      - {uses: actions/checkout@v4, with: {fetch-depth: 0}}
+      - uses: gacts/gitleaks@v1
 
   lint:
-    name: Golang-CI (lint)
+    name: 🧪 Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-go@v5
-
-      - uses: golangci/golangci-lint-action@v6 # Action page: <https://github.com/golangci/golangci-lint-action>
-        with: {skip-pkg-cache: true, skip-build-cache: true}
+      - uses: golangci/golangci-lint-action@v7
+      - run: go test -race -covermode=atomic ./...
 
   test:
-    name: Unit tests
+    name: 🧪 Test
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        go: ['1.17', '1.18', '1.19', '1.20']
+        go: ['1.17', '1.18', '1.19', '1.20', 'stable']
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: gacts/setup-go-with-cache@v1
-        with: {go-version: '${{ matrix.go }}'}
-
       - uses: actions/checkout@v4
-        with: {fetch-depth: 2} # Fixes codecov error 'Issue detecting commit SHA'
-
+      - {uses: actions/setup-go@v5, with: {go-version: '${{ matrix.go }}'}}
       - run: go run ./examples/simple/
-
       - if: matrix.os == 'ubuntu-latest'
         run: go test -race -covermode=atomic -coverprofile ./coverage.txt ./... # -race is not supported on other OS
-
       - if: matrix.os != 'ubuntu-latest'
         run: go test -covermode=atomic -coverprofile ./coverage.txt ./...
 
-      - name: Upload Coverage report to CodeCov
-        continue-on-error: true
-        uses: codecov/codecov-action@v5 # https://github.com/codecov/codecov-action
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.txt
-          fail_ci_if_error: false
