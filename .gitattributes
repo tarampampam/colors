@@ -1,2 +1,0 @@
-# Disable next extensions in project "used languages" list
-Makefile linguist-detectable=false

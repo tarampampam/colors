@@ -6,8 +6,8 @@ import (
 	"gh.tarampamp.am/colors"
 )
 
-func main() {
-	fmt.Println(
+func main() { //nolint:funlen
+	fmt.Println( //nolint:forbidigo
 		(colors.FgGreen | colors.Bold).Wrap("tarampampam/colors:"),
 		(colors.FgBlue | colors.FgBright).Wrap("an"),
 		(colors.FgWhite | colors.FgBright).Wrap("ANSI"),
@@ -16,7 +16,7 @@ func main() {
 		(colors.FgMagenta | colors.FgBright).Wrap("included"),
 	)
 
-	println() // empty line
+	println() //nolint:forbidigo // empty line
 
 	for _, set := range []struct {
 		name                          string
@@ -72,9 +72,9 @@ func main() {
 			colors.FgWhite | colors.FgBright | colors.Bold | colors.Italic | colors.Underline,
 		},
 	} {
-		fmt.Printf("%s\t", set.fg.Wrap(set.name))
-		fmt.Printf("%s normal %s\t", set.bg.Start(), set.bg.Reset())
-		fmt.Printf("%s bright %s\t", set.bgBright.Start(), set.bgBright.Reset())
-		fmt.Printf("%sStyled %s%s\n", set.customStyle.Start(), set.name, set.customStyle.Reset())
+		fmt.Printf("%s\t", set.fg.Wrap(set.name))                                                 //nolint:forbidigo
+		fmt.Printf("%s normal %s\t", set.bg.Start(), set.bg.Reset())                              //nolint:forbidigo
+		fmt.Printf("%s bright %s\t", set.bgBright.Start(), set.bgBright.Reset())                  //nolint:forbidigo
+		fmt.Printf("%sStyled %s%s\n", set.customStyle.Start(), set.name, set.customStyle.Reset()) //nolint:forbidigo
 	}
 }

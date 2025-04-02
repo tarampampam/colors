@@ -1,4 +1,7 @@
-name: release
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+name: 🚀 Release
 
 on:
   release: # Docs: <https://help.github.com/en/articles/events-that-trigger-workflows#release-event-release>
@@ -6,7 +9,7 @@ on:
 
 jobs:
   godocs:
-    name: Renew docs and cache (${{ matrix.proxy }})
+    name: 🏗️ Renew the docs and cache (${{ matrix.proxy }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -14,14 +17,11 @@ jobs:
         proxy:
           - https://proxy.golang.org
           - https://goproxy.cn
-          #- https://goproxy.dev
+          - https://goproxy.dev
     steps:
       - uses: actions/setup-go@v5
-
       - {uses: gacts/github-slug@v1, id: slug}
-
       - run: go mod init test
-
       - name: Get the module using proxy
         env: {GOPROXY: '${{ matrix.proxy }}'}
         run: go get -v -x -u "gh.tarampamp.am/colors@${{ steps.slug.outputs.tag-name }}"
