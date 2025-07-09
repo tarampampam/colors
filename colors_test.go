@@ -37,6 +37,7 @@ func TestColorsEnabled(t *testing.T) {
 
 		go func() {
 			defer wg.Done()
+
 			colors.Enabled(false)
 			colors.Enabled(true)
 			colors.Enabled()
@@ -220,7 +221,7 @@ func BenchmarkColorCodes(b *testing.B) {
 
 	colors.Enabled(true)
 	b.ReportAllocs()
-	_ = bmWrapRes //nolint:wsl
+	_ = bmWrapRes //nolint:wsl_v5
 
 	for i := 0; i < b.N; i++ {
 		bmWrapRes = (colors.FgGreen | colors.BgRed | colors.Bold).Wrap("FOOBAR")
