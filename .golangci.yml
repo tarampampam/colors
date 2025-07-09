@@ -121,7 +121,7 @@ formatters:
       sections:
         - standard
         - default
-        - prefix(gh.tarampamp.am/webhook-tester)
+        - prefix(gh.tarampamp.am/colors)
     gofmt:
       simplify: false
   exclusions:
