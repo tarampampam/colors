@@ -18,7 +18,7 @@ jobs:
           - https://proxy.golang.org
           - https://goproxy.cn
     steps:
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
       - {uses: gacts/github-slug@v1, id: slug}
       - run: go mod init test
       - name: Get the module using proxy
