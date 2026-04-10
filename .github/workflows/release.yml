@@ -19,7 +19,8 @@ jobs:
           - https://goproxy.cn
     steps:
       - uses: actions/setup-go@v6
-      - {uses: gacts/github-slug@v1, id: slug}
+      - uses: gacts/github-slug@v1
+        id: slug
       - run: go mod init test
       - name: Get the module using proxy
         env: {GOPROXY: '${{ matrix.proxy }}'}
